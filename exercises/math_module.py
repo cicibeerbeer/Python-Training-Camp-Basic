@@ -1,3 +1,4 @@
+import math
 """
 练习: 使用math模块
 
@@ -18,4 +19,5 @@ def calculate_square_root(number):
     - 数字的平方根
     """
     # 请在下方编写代码
+    return math.sqrt(number)
     pass 

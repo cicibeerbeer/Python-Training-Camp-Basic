@@ -1,3 +1,4 @@
+import requests
 """
 练习: HTTP请求
 
@@ -26,6 +27,14 @@ def get_website_content(url):
     # 请在下方编写代码
     # 使用requests.get()发送GET请求
     # 返回包含状态码、内容和头部信息的字典
+    response = requests.get(url)
+    
+    # 构建并返回包含状态码、内容和头部信息的字典
+    return {
+        'status_code': response.status_code,
+        'content': response.text,
+        'headers': dict(response.headers)
+    }
     pass
 
 def post_data(url, data):
@@ -47,4 +56,21 @@ def post_data(url, data):
     # 请在下方编写代码
     # 使用requests.post()发送POST请求
     # 返回包含状态码、响应JSON和成功标志的字典
+    response = requests.post(url, json=data)
+    
+    # 检查状态码是否为2xx(成功)
+    success = 200 <= response.status_code < 300
+    
+    # 获取JSON响应(如果可能)
+    try:
+        response_json = response.json()
+    except ValueError:
+        response_json = None
+    
+    # 构建并返回结果字典
+    return {
+        'status_code': response.status_code,
+        'response_json': response_json,
+        'success': success
+    }
     pass 
